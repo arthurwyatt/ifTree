@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="js/ifTree.js"></script>
+	<script src="js/data.js"></script>
+	<title>ifTree</title>
+</head>
+
+<body>
+	<h2>ifTree</h2>
+	<div id="tree"></div>
+	<script>
+	var tree = new Tree("tree", {
+	    nodes: data.nodes,
+	    start: "stream",
+	    flags: data.flags
+	});
+	</script>
+
+</body>
+
+</html>
