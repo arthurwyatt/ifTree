@@ -1,10 +1,10 @@
 var ifTree = (function () {
     var Tree = function (elemId, options) {
         this.elem = document.getElementById(elemId);
-        this.options = options;
+        this.options = options || {};
 
         if (this.elem) {
-            //initialise
+            //initialise 
             this.init();
         } else {
             throw "Element #" + elemId + " not found.";
@@ -17,14 +17,12 @@ var ifTree = (function () {
         this.nodes = this.options.nodes || {};
         if (!this.nodes.nowhere) {
             this.nodes.nowhere = {
-                nowhere: {
-                    text: "<p>You are not sure where you are.</p>"
-                }
+                text: "<p>You are not sure where you are.</p>"
             };
         }
-
-        //set up flags - uses JSON object to clone
-        this.flags = (JSON.parse(JSON.stringify(this.options.flags))) || {};
+ 
+        //set up flags 
+        this.resetFlags();
 
         //set up UI        
         this.elem.addEventListener('click', function (e) {
@@ -38,24 +36,34 @@ var ifTree = (function () {
         this.showNode(this.currentNode);
     };
 
-    Tree.prototype.showNode = function (currentNode) {
+    Tree.prototype.showNode = function (node) {
         //strings to be built
         var text = "";
         var options = "";
 
         //check for problems
-        if (!currentNode || !currentNode.text) {
+        if (!node || !node.text) {
             console.log("No node, defaulting to nowhere");
-            currentNode = this.nodes.nowhere;
+            node = this.nodes.nowhere;
         }
 
-        //get text from currentNode and start building text
-        text = currentNode.text;
+        //execute onShow function if present
+        if (node.onShow && typeof(node.onShow) === "function") {
+            var result = node.onShow.call(this);
+            if (typeof(result) === "string") {
+                //if a string is returned we redirect to the node of that name
+                this.goTo(result);
+                return;   
+            } 
+        }
+
+        //get text from current Node and start building text
+        text = node.text;
 
         //show messages
-        if (currentNode.messages) {
-            for (var i = 0; i < currentNode.messages.length; i++) {
-                var message = currentNode.messages[i];
+        if (node.messages) {
+            for (var i = 0; i < node.messages.length; i++) {
+                var message = node.messages[i];
                 //check flags
                 if ((!message.showIf && !message.showIfNot) || (message.showIf && this.flags[message.showIf]) || (message.showIfNot && !this.flags[message.showIfNot])) {
                     text += message.text;
@@ -64,9 +72,9 @@ var ifTree = (function () {
         }
 
         //show options
-        if (currentNode.options && currentNode.options.length > 0) {
-            for (var j = 0; j < currentNode.options.length; j++) {
-                var option = currentNode.options[j];
+        if (node.options && node.options.length > 0) {
+            for (var j = 0; j < node.options.length; j++) {
+                var option = node.options[j];
                 //check flags
                 if ((!option.showIf && !option.showIfNot) || (option.showIf && this.flags[option.showIf]) || (option.showIfNot && !this.flags[option.showIfNot])) {
                     options += "<li><button value='" + j + "'>" + option.label + "</li>";
@@ -76,16 +84,15 @@ var ifTree = (function () {
 
         //set flags
         
-        if (currentNode.resetFlags) {
-            //reclone flags from options
-            this.flags = (JSON.parse(JSON.stringify(this.options.flags)));   
+        if (node.resetFlags) {
+            this.resetFlags();
         }
         
-        if (currentNode.setFalse) {
+        if (node.setFalse) {
             this.flags[currentNode.setFalse] = false;
         }
 
-        if (currentNode.setTrue) {
+        if (node.setTrue) {
             this.flags[currentNode.setTrue] = true;
         }
 
@@ -93,10 +100,22 @@ var ifTree = (function () {
         this.elem.innerHTML = text + options;
     };
 
-    Tree.prototype.selectOption = function (currentNode, selectedOption) {
-        var option = currentNode.options[selectedOption];
-        this.currentNode = this.nodes[option.target];
-        this.showNode(this.currentNode);
+    Tree.prototype.selectOption = function (node, optionIndex) {
+        var option = node.options[optionIndex];
+        this.goTo(this.nodes[option.target]);
+    };
+
+    Tree.prototype.goTo = function (target) {
+        this.currentNode = target;
+        this.showNode(this.currentNode);        
+    };
+
+    Tree.prototype.resetFlags = function () {
+        if (this.options.flags) {
+            this.flags = (JSON.parse(JSON.stringify(this.options.flags)));
+        } else {
+            this.flags = {};
+        }   
     };
 
     return {

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="js/ifTree.js"></script>
+	<script src="js/data.js"></script>
+	<title>ifTree - Javascript Alert</title>
+</head>
+
+<body>
+	<h2>ifTree - Javascript Alert</h2>
+	<div id="tree"></div>
+	<script>
+	var tree = ifTree.init("tree", {
+	    nodes: {
+	    	start: {
+	    		text: "<p>You are a bare concrete bunker standing in front of a shiny red button.</p>",
+	    		options: [{
+	    			label: "Press the button!",
+	    			target: "boom",
+	    			}]
+	    	},
+	    	boom:  { 
+	    		text:"<p>BOOOOOOM!!!</p> <p>Everything explodes, probably shouldn't have pressed that button.</p>",
+	    		onShow: function() { 
+	    				alert("SELF DESTRUCT ACTIVATED."); 
+	    			} 
+	    	}
+	    }
+	});
+	</script>
+
+</body>
+
+</html>
