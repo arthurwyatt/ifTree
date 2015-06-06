@@ -1,10 +1,14 @@
-var Tree = (function () {
+var ifTree = (function () {
     var Tree = function (elemId, options) {
         this.elem = document.getElementById(elemId);
         this.options = options;
 
-        //initialise
-        this.init();
+        if (this.elem) {
+            //initialise
+            this.init();
+        } else {
+            throw "Element #" + elemId + " not found.";
+        }
     };
 
     //methods:
@@ -25,7 +29,7 @@ var Tree = (function () {
         //set up UI        
         this.elem.addEventListener('click', function (e) {
             if (e.target.tagName === 'BUTTON') {
-                this.selectOption(this.currentNode, e.target.value)
+                this.selectOption(this.currentNode, e.target.value);
             }
         }.bind(this));
 
@@ -62,7 +66,7 @@ var Tree = (function () {
         //show options
         if (currentNode.options && currentNode.options.length > 0) {
             for (var j = 0; j < currentNode.options.length; j++) {
-                option = currentNode.options[j];
+                var option = currentNode.options[j];
                 //check flags
                 if ((!option.showIf && !option.showIfNot) || (option.showIf && this.flags[option.showIf]) || (option.showIfNot && !this.flags[option.showIfNot])) {
                     options += "<li><button value='" + j + "'>" + option.label + "</li>";
@@ -90,11 +94,14 @@ var Tree = (function () {
     };
 
     Tree.prototype.selectOption = function (currentNode, selectedOption) {
-        //just use the node name for now, we'll do something more in depth later
         var option = currentNode.options[selectedOption];
         this.currentNode = this.nodes[option.target];
         this.showNode(this.currentNode);
-    }
+    };
 
-    return Tree;
+    return {
+        init: function (elemId, options) { 
+            return new Tree(elemId, options);
+        }
+    };
 })();

@@ -1,5 +1,50 @@
 var data = {
     nodes: {
+        stream: {
+            text: "<p>You are by a gently trickling  stream in a forest. A path heads deeper into the forest to the east.</p>",
+            options: [{
+                target: "beach",
+                label: "Follow the stream"
+            }, {
+                target: "forest",
+                label: "Go deeper into the forest"
+            }],
+            messages: [{
+                showIf: "startingGame",
+                text: "<p>How do you start your adventure?</p>"
+            }],
+            setFalse: "startingGame"
+        },
+        beach: {
+            text: "<p>You are on a beach.</p>",
+            options: [{
+                target: "stream",
+                label: "Go back."
+            }, {
+                showIfNot: "journalRead",
+                target: "journal",
+                label: "Read the journal"
+            }],
+            messages: [{
+                showIfNot: "journalRead",
+                text: "<p>Someone had carelessly left their journal here.</p>"
+            }]
+        },
+        journal: {
+            text: "<p>The last entry:</p><p><em>Hoped to explore the cave today, but I'm too afraid to go in since I lost my sword in the forest.</em></p>",
+            options: [{
+                showIf: "caveFound",
+                target: "cave",
+                label: "Head to the cave."
+            }, {
+                target: "forest",
+                label: "Explore the forest."
+            }, {
+                target: "beach",
+                label: "Stay on the beach."
+            }],
+            setTrue: "journalRead"
+        },
         forest: {
             text: "<p>You are in a forest. A path leads to the east and west.</p>",
             options: [{
@@ -14,7 +59,7 @@ var data = {
             }]
         },
         lost: {
-            text: "Uh oh. You have gotten lost in the forest.",
+            text: "<p>Uh oh. You have gotten lost in the forest.</p>",
             options: [{
                 target: "verylost",
                 label: "Go left"
@@ -30,7 +75,7 @@ var data = {
             setTrue: "lostBefore"
         },
         verylost: {
-            text: "I'm not sure if that was the right way.",
+            text: "<p>I'm not sure if that was the right way.</p>",
             options: [{
                 target: "stilllost",
                 label: "Go that way."
@@ -40,7 +85,7 @@ var data = {
             }]
         },
         superlost: {
-            text: "You have gotten yourself all turned around.",
+            text: "<p>You have gotten yourself all turned around.</p>",
             options: [{
                 target: "mostlylost",
                 label: "Go North???"
@@ -56,7 +101,7 @@ var data = {
             }]
         },
         stilllost: {
-            text: "you are still lost.",
+            text: "<p>you are still lost.</p>",
             options: [{
                 target: "superlost",
                 label: "I think you came from this way."
@@ -66,7 +111,7 @@ var data = {
             }]
         },
         mostlylost: {
-            text: "That might have been the right way, I think I can see path from here.",
+            text: "<p>That might have been the right way, I think I can see path from here.</p>",
             options: [{
                 target: "forest",
                 label: "Go forwards."
@@ -84,7 +129,7 @@ var data = {
             }]
         },
         sword: {
-            text: "You pick it up. Now you have a sword - awesome!",
+            text: "<p>You pick it up. Now you have a sword - awesome!</p>",
             options: [{
                 target: "forest",
                 label: "Go forwards."
@@ -93,36 +138,6 @@ var data = {
                 label: "Go back."
             }],
             setTrue: "hasSword"
-        },
-        stream: {
-            text: "<p>You are by a gently trickling  stream in a forest. A path heads deeper into the forest to the east.</p>",
-            options: [{
-                target: "beach",
-                label: "Follow the stream"
-            }, {
-                target: "forest",
-                label: "Go deeper into the forest"
-            }],
-            messages: [{
-                showIf: "startingGame",
-                text: "<p>How do you start your adventure?</p>"
-            }],
-            setFalse: "startingGame"
-        },
-        beach: {
-            text: "You are on a beach.",
-            options: [{
-                target: "stream",
-                label: "Go back."
-            }, {
-                showIfNot: "journalRead",
-                target: "journal",
-                label: "Read the journal"
-            }],
-            messages: [{
-                showIfNot: "journalRead",
-                text: "<p>Someone had carelessly left their journal here.</p>"
-            }]
         },
         cave: {
             text: "<p>You have found a mysterious cave.</p>",
@@ -140,23 +155,8 @@ var data = {
             }],
             setTrue: "caveFound"
         },
-        journal: {
-            text: "The last entry: <em>Hoped to explore the cave today, but I'm too afraid to go in since I lost my sword in the forest.</em>",
-            options: [{
-                showIf: "caveFound",
-                target: "cave",
-                label: "Head to the cave."
-            }, {
-                target: "forest",
-                label: "Explore the forest."
-            }, {
-                target: "beach",
-                label: "Stay on the beach."
-            }],
-            setTrue: "journalRead"
-        },
         areyousure: {
-            text: "Are you sure? It's a bit scary.",
+            text: "<p>Are you sure? It's a bit scary.</p>",
             options: [{
                 target: "eaten",
                 label: "Yes! Head right in."
