@@ -7,7 +7,8 @@ var ifTree = (function () {
             //initialise 
             this.init();
         } else {
-            throw "Element #" + elemId + " not found.";
+            throw "Element #{{0}} not found."
+                .replace("{{0}}", elemId);
         }
     };
 
@@ -37,9 +38,6 @@ var ifTree = (function () {
     };
 
     Tree.prototype.showNode = function (node) {
-        //strings to be built
-        var text = "";
-        var options = "";
 
         //check for problems
         if (!node || !node.text) {
@@ -58,26 +56,30 @@ var ifTree = (function () {
         }
 
         //get text from current Node and start building text
-        text = node.text;
+        var text = node.text;
 
+        var messages = [];
         //show messages
         if (node.messages) {
             for (var i = 0; i < node.messages.length; i++) {
                 var message = node.messages[i];
                 //check flags
                 if ((!message.showIf && !message.showIfNot) || (message.showIf && this.flags[message.showIf]) || (message.showIfNot && !this.flags[message.showIfNot])) {
-                    text += message.text;
+                    messages.push(message.text);
                 }
             }
         }
 
         //show options
+        var options = [];
         if (node.options && node.options.length > 0) {
             for (var j = 0; j < node.options.length; j++) {
                 var option = node.options[j];
                 //check flags
                 if ((!option.showIf && !option.showIfNot) || (option.showIf && this.flags[option.showIf]) || (option.showIfNot && !this.flags[option.showIfNot])) {
-                    options += "<li><button value='" + j + "'>" + option.label + "</li>";
+                    options.push("<li><button value='{{0}}'>{{1}}</li>"
+                        .replace("{{0}}", j)
+                        .replace("{{1}}", option.label));
                 }
             }
         }
@@ -96,7 +98,10 @@ var ifTree = (function () {
         }
 
         //write out text and options for the node
-        this.elem.innerHTML = text + options;
+        this.elem.innerHTML = "{{0}}{{1}}<ul>{{2}}</ul>"
+            .replace("{{0}}", text)
+            .replace("{{1}}", messages.join(""))
+            .replace("{{2}}", options.join(""));
     };
 
 
