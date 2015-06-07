@@ -131,11 +131,11 @@ var ifTree = (function () {
             this.flags[option.setTrue] = true;
         }        
 
-        this.goTo(this.nodes[option.target]);
+        this.goTo(option.target);
     };
 
     Tree.prototype.goTo = function (target) {
-        this.currentNode = target;
+        this.currentNode = this.nodes[target];
         this.showNode(this.currentNode);        
     };
 
