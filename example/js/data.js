@@ -121,7 +121,8 @@ var data = {
             }, {
                 showIfNot: "hasSword",
                 target: "sword",
-                label: "Pick up the sword."
+                label: "Pick up the sword.",
+                setTrue: "hasSword"
             }],
             messages: [{
                 showIfNot: "hasSword",
@@ -136,8 +137,7 @@ var data = {
             }, {
                 target: "stilllost",
                 label: "Go back."
-            }],
-            setTrue: "hasSword"
+            }]
         },
         cave: {
             text: "<p>You have found a mysterious cave.</p>",
@@ -166,19 +166,19 @@ var data = {
             }]
         },
         eaten: {
-            text: "<p>In the darkness of the cave something horrible eats you to death.</p>",
-            resetFlags: true,
+            text: "<p>In the darkness of the cave something horrible eats you to death.</p>",        
             options: [{
                 target: "stream",
-                label: "Try again."
+                label: "Try again.",
+                resetFlags: true
             }]
         },
         treasure: {
             text: "<p>You bravely step into the cave. You think you hear something scuttle away but, holding your sword, you bravely bravely press on.</p><p>Eventually you find an ancient chest. You open it - CONGRATULATIONS, YOU HAVE FOUND THE LOST TREASURE!</p>",
-            resetFlags: true,
             options: [{
                 target: "stream",
-                label: "Play again."
+                label: "Play again.",
+                resetFlags: true
             }]
         }
     },

@@ -83,25 +83,49 @@ var ifTree = (function () {
         }
 
         //set flags
-        
         if (node.resetFlags) {
             this.resetFlags();
         }
         
         if (node.setFalse) {
-            this.flags[currentNode.setFalse] = false;
+            this.flags[node.setFalse] = false;
         }
 
         if (node.setTrue) {
-            this.flags[currentNode.setTrue] = true;
+            this.flags[node.setTrue] = true;
         }
 
         //write out text and options for the node
         this.elem.innerHTML = text + options;
     };
 
+
     Tree.prototype.selectOption = function (node, optionIndex) {
         var option = node.options[optionIndex];
+        var target = option.target;
+
+        //execute onShow function if present
+        if (option.onSelect && typeof(option.onSelect) === "function") {
+            var result = option.onSelect.call(this);
+            if (typeof(result) === "string") {
+                //if a string is returned use that as the new target
+                target = result;
+            } 
+        }
+
+        //set flags        
+        if (option.resetFlags) {
+            this.resetFlags();
+        }
+        
+        if (option.setFalse) {
+            this.flags[option.setFalse] = false;
+        }
+
+        if (option.setTrue) {
+            this.flags[option.setTrue] = true;
+        }        
+
         this.goTo(this.nodes[option.target]);
     };
 
