@@ -3,40 +3,66 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<script src="js/ifTree.js"></script>
-	<script src="js/data.js"></script>
-	<title>ifTree - Javascript Confirm</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/ifTree.js"></script>
+    <title>ifTree - Javascript Confirm</title>
 </head>
 
 <body>
-	<h2>ifTree - Javascript Confirm</h2>
-	<div id="tree"></div>
-	<script>
-	var tree = ifTree.init("tree", {
-	    nodes: {
-	    	start: {
-	    		text: "<p>You are a bare concrete bunker standing in front of a shiny red button.</p>",
-	    		options: [{
-	    			label: "Press the button!",
-	    			target: "boom",
-	    			}]
-	    	},
-	    	boom:  { 
-	    		text:"<p>BOOOOOOM!!!</p> <p>Everything explodes, probably shouldn't have pressed that button.</p>",
-	    		onShow: function() { 
-	    				if (!window.confirm("Are you sure?")) { 
-  							return "phew";
-						} 
-	    			} 
-	    	},
-	    	phew: {
-	    		text: "<p>Yeah, probably best not to play with it.</p>"
-	    	}
-	    }
-	});
-	</script>
+    <h2>ifTree - Javascript Confirm</h2>
+    <div id="tree"></div>
+    <!--prepopulating this as JSON.stringify does not handle functions.-->
+    <pre id="source">
+{
+    nodes: {
+        start: {
+            text: "&lt;p&gt;You are a bare concrete bunker standing in front of a shiny red button.&lt;/p&gt;",
+            options: [{
+                label: "Press the button!",
+                target: "boom",
+                }]
+        },
+        boom:  { 
+            text:"&lt;p&gt;BOOOOOOM!!!&lt;/p&gt; &lt;p&gt;Everything explodes, probably shouldn't have pressed that button.&lt;/p&gt;",
+            onShow: function() { 
+                    if (!window.confirm("Are you sure?")) { 
+                            return "phew";
+                    } 
+                } 
+        },
+        phew: {
+            text: "&lt;p&gt;Yeah, probably best not to play with it.&lt;/p&gt;"
+        }
+    }
+}
+    </pre>
+    <script>
+    var tree = ifTree.init("tree", {
+        nodes: {
+            start: {
+                text: "<p>You are a bare concrete bunker standing in front of a shiny red button.</p>",
+                options: [{
+                    label: "Press the button!",
+                    target: "boom",
+                    }]
+            },
+            boom:  { 
+                text:"<p>BOOOOOOM!!!</p> <p>Everything explodes, probably shouldn't have pressed that button.</p>",
+                onShow: function() { 
+                        if (!window.confirm("Are you sure?")) { 
+                            return "phew";
+                        } 
+                    } 
+            },
+            phew: {
+                text: "<p>Yeah, probably best not to play with it.</p>"
+            }
+        }
+    });
+    </script>
 
+    <p class="moreExamples"><a href="index.html">&laquo; More examples</a></p>
 </body>
 
 </html>

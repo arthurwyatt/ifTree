@@ -3,23 +3,32 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<script src="js/ifTree.js"></script>
-	<script src="js/gameData.js"></script>
-	<title>ifTree - Simple Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/ifTree.js"></script>
+    <script src="js/gameData.js"></script>
+    <script src="js/utils.js"></script>
+
+    <title>ifTree - Simple Game</title>
 </head>
 
 <body>
-	<h2>ifTree - Simple Game</h2>
-	<div id="tree"></div>
-	<script>
-	var tree = ifTree.init("tree", {
-	    nodes: data.nodes,
-	    start: "stream",
-	    flags: data.flags
-	});
-	</script>
+    <h2>ifTree - Simple Game</h2>
+    <div id="tree"></div>
+    <pre id="source"></pre>
+    <script>
+        var tree = ifTree.init("tree", {
+            nodes: data.nodes,
+            start: "stream",
+            flags: data.flags
+        });
 
+        //show the source
+        showSource(tree, "source");
+    </script>
+    
+    <p class="moreExamples"><a href="index.html">&laquo; More examples</a></p>
+    
 </body>
 
 </html>
