@@ -140,11 +140,15 @@ var ifTree = (function () {
     };
 
     Tree.prototype.resetFlags = function () {
+        this.flags = {};
         if (this.options.flags) {
             this.flags = (JSON.parse(JSON.stringify(this.options.flags)));
-        } else {
-            this.flags = {};
-        }   
+            for (var key in this.options.flags) {
+                if ( this.options.flags.hasOwnProperty(key)) {
+                   this.flags[key] =  this.options.flags[key];
+                }
+            }
+        } 
     };
 
     return {
