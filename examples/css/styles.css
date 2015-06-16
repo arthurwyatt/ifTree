@@ -22,9 +22,8 @@ h2 {
     background-color: #333333;
     color: white;
     padding: 0.5em;
-    margin: -0.5em -0.5em 0.5em -0.5em;
+    margin: -0.5em -0.30em 0.5em -0.5em;
     font-weight: normal;
-
 } 
 
 button {
@@ -36,13 +35,18 @@ hr {
 	border: 1px solid #cccccc;
 }
 
+#tree {
+	float: left;
+	width: 50%;
+}
+
 #tree ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-pre {
+#source {
 	padding: 0.5em;
 	font-size: 0.75em;
 	font-family: courier, monospace;
@@ -50,28 +54,50 @@ pre {
 	background-color: #dddddd;
 	margin: 0.5em -1px;
 	overflow: auto;
+	width: 45%;
+	float: right;
 }
 
-@media (min-width: 600px) {
-	#tree {
-		width: 50%;
-		float: left;
+.moreExamples {
+	position: absolute;
+	top: 0.75em;
+	right: 0.75em;
+	margin: 0;
+	padding: 0;
+}
+
+.moreExamples a {
+	color: white;
+}
+
+@media only screen and (max-device-width: 480px) {
+	body {
+		font-size: 2em;
 	}
 
-	pre {
-		width: 45%;
-		float: right;
+	button {
+		width: 100%;
+		font-size: 1.5em;
+	}
+
+	#tree {
+		float: none;
+		width: auto;
+	}
+
+	#source {
+		float: none;
+		width: auto;
 	}
 
 	.moreExamples {
-		position: absolute;
-		top: 0.75em;
-		right: 0.75em;
-		margin: 0;
-		padding: 0;
+		margin: 1em 0px;
+		position: relative;
+		top: 0;
+		right: 0;
 	}
 
 	.moreExamples a {
-		color: white;
+		color: #333399; 
 	}
-};
+}
