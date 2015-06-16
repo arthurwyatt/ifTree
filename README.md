@@ -19,7 +19,7 @@ Then initialise it:
 Id is the id of the element you want to attach the tree to. 
 Options provides the settings for the tree, including the data for the nodes and any flags.
 
- ### Options
+### Options
 
  The structure of the options object is as follows:  
 
@@ -63,7 +63,7 @@ Options provides the settings for the tree, including the data for the nodes and
         start: "anyNode"                        // Starting node - defaults to "Start"
     }
 
-it is also recommened you take a look at the source of [the examples](http://localhost/ifTree/examples/index.html) to see it's various features in action.
+it is also recommened you take a look at the source of [the examples](http://localhost/ifTree/examples/index.html) to see various features in action.
 
 ### License
 IfTree is licensed under the [MIT license](http://opensource.org/licenses/MIT).
