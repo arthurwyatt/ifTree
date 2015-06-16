@@ -131,7 +131,13 @@ var ifTree = (function () {
             this.flags[option.setTrue] = true;
         }        
 
-        this.goTo(option.target);
+        if (option.target.constructor == Array) {
+            //if we have an array of targets pick one. 
+            this.goTo(option.target[Math.floor(Math.random() * option.target.length)]);
+        } else {
+            //otherwise just go to the target
+            this.goTo(option.target);
+        }
     };
 
     Tree.prototype.goTo = function (target) {

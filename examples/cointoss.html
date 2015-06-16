@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/ifTree.js"></script>
+    <script src="js/utils.js"></script>
+    <title>ifTree - Coin Toss</title>
+</head>
+
+<body>
+    <h2>ifTree - Coin Toss</h2>
+    <div id="tree"></div>
+
+    <pre id="source"></pre>
+    <script>
+    var tree = ifTree.init("tree", {
+        nodes: {
+            start: {
+                text: "<p>Lets play a game! Heads you win, tails you lose.</p>",
+                options: [{
+                        label: "Flip a coin",
+                        target: ["heads", "tails"]
+                    }]
+            },
+            heads:  { 
+                text:"<p>HEADS - congratulations!</p>",
+                options: [{
+                        label: "Play again.",
+                        target: "start"
+                    }]
+            },
+            tails: {
+                text: "<p>TAILS - better luck next time!</p>",
+                options: [{
+                        label: "Play again.",
+                        target: "start"
+                    }]
+            }
+        }
+    });
+
+    //show the source
+    showSource(tree, "source");
+    </script>
+
+    <p class="moreExamples"><a href="index.html">&laquo; More examples</a></p>
+</body>
+
+</html>

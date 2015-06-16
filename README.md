@@ -1,5 +1,7 @@
 # ifTree
-Javascript plugin to provide simple JSON driven dialogue trees or interactive fiction games, with plenty of hooks to trigger JavaScript events. 
+Javascript plugin to provide simple JSON driven dialogue trees or interactive fiction games, like [this one](http://localhost/ifTree/examples/simpleGame.html) with plenty of hooks to trigger JavaScript events. 
+
+The tree consists of text nodes, with optional messages and option links to take you to other nodes. There are also flags that can be set as the user travels through the tree. 
 
 ## Usage
 
@@ -11,13 +13,15 @@ Then initialise it:
 
     var tree = ifTree.init(
         "tree",                                 // Id
-        {}                                      // Options
+        {...}                                      // Options
     );
 
 Id is the id of the element you want to attach the tree to. 
+Options provides the settings for the tree, including the data for the nodes and any flags.
 
-Options provides the settings for the tree, including the node structure, in the following structure: 
+ ### Options
 
+ The structure of the options object is as follows:  
 
     {
         /* The nodes of our tree as key value pairs */
@@ -34,6 +38,7 @@ Options provides the settings for the tree, including the node structure, in the
                 /* Array of options - can be shown or hidden using flags but are shown by default. */
                 options: [{
                     target: "anyNode",          // Node to navigate to if the option is selected.
+                                                // If an array is used a target will be randomly picked from it.
                     label: "Click Me.",         // Text to show for the node.
                     showIf: "anyFlag",          // Shows the option if this flag is true.
                     showIfNot: "anotherFlag"    // Shows the option if this flag is false.
@@ -58,3 +63,7 @@ Options provides the settings for the tree, including the node structure, in the
         start: "anyNode"                        // Starting node - defaults to "Start"
     }
 
+it is also recommened you take a look at the source of [the examples](http://localhost/ifTree/examples/index.html) to see it's various features in action.
+
+### License
+IfTree is licensed under the [MIT license](http://opensource.org/licenses/MIT).
