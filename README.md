@@ -13,7 +13,7 @@ Then initialise it:
 
     var tree = ifTree.init(
         "tree",                                 // Id
-        {...}                                      // Options
+        {...}                                   // Options
     );
 
 Id is the id of the element you want to attach the tree to. 
@@ -63,7 +63,7 @@ Options provides the settings for the tree, including the data for the nodes and
         start: "anyNode"                        // Starting node - defaults to "Start"
     }
 
-it is also recommened you take a look at the source of [the examples](http://localhost/ifTree/examples/index.html) to see various features in action.
+it is also recommened you take a look at the source of [the examples](http://arthurwyatt.github.io/ifTree/examples/) to see various features in action.
 
 ### License
 IfTree is licensed under the [MIT license](http://opensource.org/licenses/MIT).
