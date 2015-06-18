@@ -1,5 +1,5 @@
 # ifTree
-Javascript plugin to provide simple JSON driven dialogue trees or interactive fiction games, like [this one](http://localhost/ifTree/examples/simpleGame.html) with plenty of hooks to trigger JavaScript events. 
+Javascript plugin to provide simple JSON driven dialogue trees or interactive fiction games, like [this one](http://arthurwyatt.github.io/ifTree/examples/simpleGame.html) with plenty of hooks to trigger JavaScript events. 
 
 The tree consists of text nodes, with optional messages and option links to take you to other nodes. There are also flags that can be set as the user travels through the tree. 
 
